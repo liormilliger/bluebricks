@@ -9,11 +9,11 @@ terraform {
   # --- BACKEND CONFIGURATION ---
   # Note: The Bucket and DynamoDB table must exist BEFORE running 'terraform init'
   backend "s3" {
-    bucket         = "bluebricks"                     # CHANGE THIS to a unique name if needed
+    bucket         = "liorm-bluebricks"                     # CHANGE THIS to a unique name if needed
     key            = "tfstate/terraform.tfstate"      # This creates the 'tfstate' folder
-    region         = "us-east-1"                      # Must match your bucket's region
+    region         = "us-east-2"                      # Must match your bucket's region
     encrypt        = true
-    dynamodb_table = "bluebricks-locks"               # Table for state locking
+    dynamodb_table = "liorm-bluebricks-locks"               # Table for state locking
   }
 }
 

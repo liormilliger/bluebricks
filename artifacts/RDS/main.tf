@@ -26,7 +26,7 @@ resource "aws_security_group" "rds_sg" {
 resource "aws_db_instance" "this" {
   identifier        = "${var.project_name}-db"
   engine            = "postgres"
-  engine_version    = "16.3" # Pinned version for stability
+  engine_version    = "16"
   instance_class    = "db.t3.micro"
   allocated_storage = 20
   storage_type      = "gp3"

@@ -75,13 +75,13 @@ resource "aws_launch_template" "this" {
       delete_on_termination = true
     }
   }
-  
+
   # Inject variables into the bash script
-  user_data = base64encode(templatefile("${path.module}/scripts/user_data.sh", {
-    image_repo     = var.image_repo
-    image_tag      = var.image_tag
-    container_port = var.container_port
-  }))
+  # user_data = base64encode(templatefile("${path.module}/scripts/user_data.sh", {
+  #   image_repo     = var.image_repo
+  #   image_tag      = var.image_tag
+  #   container_port = var.container_port
+  # }))
 
   tag_specifications {
     resource_type = "instance"

@@ -27,7 +27,7 @@ variable "db_name" {
 variable "db_username" {
   description = "Master username"
   type        = string
-  default     = "admin"
+  default     = "lior"
 }
 
 variable "db_password" {

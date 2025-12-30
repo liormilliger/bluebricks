@@ -4,7 +4,13 @@ module "network" {
 
   project_name   = var.project_name
   vpc_id         = var.vpc_id
-  public_subnets = data.aws_subnets.selected.ids
+#   public_subnets = data.aws_subnets.selected.ids
+  public_subnets = [
+    for az, subnet_ids in {
+      for s in data.aws_subnet.details : s.availability_zone => s.id... 
+    } : subnet_ids[0]
+  ]  
+  
   lb_port        = 80
 }
 
@@ -30,7 +36,7 @@ module "database" {
   source = "../artifacts/RDS"
 
   project_name = var.project_name
-  vpc_id       = data.aws_vpc.selected.id
+  vpc_id       = var.vpc_id
   subnet_ids   = data.aws_subnets.selected.ids
 
   # Connects DB to Compute
