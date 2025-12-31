@@ -1,9 +1,0 @@
-{
-    "name": "rds",
-    "description": "Generated using Bricks CLI",
-    "version": "1.0.0+870d94d9",
-    "native": {
-        "type": "opentofu",
-        "path": "."
-    }
-}

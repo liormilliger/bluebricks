@@ -12,7 +12,7 @@ output "alb_security_group_id" {
 
 output "public_subnets" {
   description = "List of Public Subnets (for ASG/Compute)"
-  value       = local.alb_subnets
+  value       = data.aws_subnets.public.ids
 }
 
 output "private_subnets" {
