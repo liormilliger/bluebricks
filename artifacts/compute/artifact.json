@@ -12,7 +12,7 @@
       "label": "VPC ID"
     },
     {
-      "name": "subnet_ids",
+      "name": "public_subnet_ids",
       "type": "list(string)",
       "required": true,
       "label": "Subnets",

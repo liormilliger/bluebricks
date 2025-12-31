@@ -98,7 +98,7 @@ resource "aws_launch_template" "this" {
 # --- Auto Scaling Group ---
 resource "aws_autoscaling_group" "this" {
   name                = "${var.project_name}-asg"
-  vpc_zone_identifier = var.subnet_ids
+  vpc_zone_identifier = var.public_subnet_ids
   target_group_arns   = [var.target_group_arn]
   
   min_size         = 1

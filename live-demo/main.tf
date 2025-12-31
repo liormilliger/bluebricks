@@ -12,7 +12,7 @@ module "compute" {
 
   project_name          = var.project_name
   vpc_id                = var.vpc_id
-  subnet_ids            = module.network.public_subnets
+  public_subnet_ids            = module.network.public_subnets
   
   alb_security_group_id = module.network.alb_security_group_id
   target_group_arn      = module.network.target_group_arn
@@ -27,7 +27,7 @@ module "database" {
 
   project_name = var.project_name
   vpc_id       = var.vpc_id
-  subnet_ids   = data.aws_subnets.selected.ids
+  private_subnet_ids   = module.network.private_subnets
   compute_security_group_id = module.compute.security_group_id
   db_password = var.db_password
 }
