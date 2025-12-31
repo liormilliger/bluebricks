@@ -1,28 +1,42 @@
-# --- 1. Get ALL Subnets (Ignore Public/Private flags) ---
-data "aws_subnets" "all" {
+# --- 1. Find Public Subnets (Now works!) ---
+data "aws_subnets" "public" {
   filter {
     name   = "vpc-id"
     values = [var.vpc_id]
   }
+  filter {
+    name   = "map-public-ip-on-launch"
+    values = ["true"] # This will now find your 2 public subnets
+  }
 }
 
-# --- 2. Get Details for AZ Grouping ---
-data "aws_subnet" "details" {
-  for_each = toset(data.aws_subnets.all.ids)
+# --- 2. Find Private Subnets ---
+data "aws_subnets" "private" {
+  filter {
+    name   = "vpc-id"
+    values = [var.vpc_id]
+  }
+  filter {
+    name   = "map-public-ip-on-launch"
+    values = ["false"] # This will find your 2 private subnets
+  }
+}
+
+# --- 3. Get Details to Group Public Subnets by AZ ---
+data "aws_subnet" "public_details" {
+  for_each = toset(data.aws_subnets.public.ids)
   id       = each.value
 }
 
-# --- 3. Smart Grouping: Force 1 Subnet per AZ ---
 locals {
-  # Group by AZ: { "us-east-2a" = ["subnet-1", "subnet-2"], "us-east-2b" = ["subnet-3"] }
-  subnets_by_az = {
-    for s in data.aws_subnet.details : s.availability_zone => s.id...
+  # Group Public subnets by AZ: { "us-east-1a" = ["subnet-X"], "us-east-1b" = ["subnet-Y"] }
+  public_by_az = {
+    for s in data.aws_subnet.public_details : s.availability_zone => s.id...
   }
-  
-  # Pick exactly ONE ID from each AZ
-  # This results in: ["subnet-1", "subnet-3"] -> Perfect for ALB
-  selected_subnets = [
-    for az, ids in local.subnets_by_az : ids[0]
+
+  # Pick ONE Public subnet per AZ for the ALB
+  alb_subnets = [
+    for az, ids in local.public_by_az : ids[0]
   ]
 }
 
@@ -33,13 +47,12 @@ resource "aws_lb" "this" {
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_sg.id]
   
-  # USE THE CALCULATED LIST
-  subnets            = local.selected_subnets
+  # Correctly uses only the Public subnets
+  subnets            = local.alb_subnets
 
   tags = { Name = "${var.project_name}-alb" }
 }
 
-# ... (Keep your Target Group, Listener, and Security Group resources below) ...
 resource "aws_lb_target_group" "this" {
   name     = "${var.project_name}-tg"
   port     = 80

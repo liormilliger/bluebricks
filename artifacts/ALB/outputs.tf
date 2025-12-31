@@ -11,11 +11,11 @@ output "alb_security_group_id" {
 }
 
 output "public_subnets" {
-  description = "The subnets selected for the ALB"
-  value       = local.selected_subnets
+  description = "List of Public Subnets (for ASG/Compute)"
+  value       = local.alb_subnets
 }
 
 output "private_subnets" {
-  description = "The subnets selected for the RDS"
-  value       = local.selected_subnets
+  description = "List of Private Subnets (for RDS)"
+  value       = data.aws_subnets.private.ids
 }
