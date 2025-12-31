@@ -9,43 +9,49 @@
       "name": "vpc_id",
       "type": "string",
       "required": true,
-      "description": "The VPC ID where the instances will run.",
       "label": "VPC ID"
     },
     {
       "name": "subnet_ids",
       "type": "list(string)",
-      "required": false,
-      "description": "List of subnets for the Auto Scaling Group.",
-      "label": "Subnets"
+      "required": true,
+      "label": "Subnets",
+      "description": "Wire this to the 'Public Subnets' output of the Network Artifact."
     },
     {
       "name": "alb_security_group_id",
       "type": "string",
-      "required": false,
-      "description": "The Security Group ID of the ALB (for ingress rules).",
-      "label": "ALB Security Group"
+      "required": true,
+      "label": "ALB Security Group",
+      "description": "Wire to Network Artifact Output."
     },
     {
       "name": "target_group_arn",
       "type": "string",
-      "required": false,
-      "description": "The ARN of the ALB Target Group (to register instances).",
-      "label": "Target Group ARN"
+      "required": true,
+      "label": "Target Group ARN",
+      "description": "Wire to Network Artifact Output."
     },
     {
-      "name": "image_repo",
+      "name": "image_registry",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "label": "Registry URL",
+      "description": "ECR URL (e.g. 123.dkr.ecr...). Leave empty for Docker Hub."
+    },
+    {
+      "name": "image_name",
       "type": "string",
       "required": true,
-      "description": "ECR Repository URL (e.g. 123.dkr.ecr.../repo).",
-      "label": "Docker Image Repo"
+      "label": "Image Name",
+      "description": "Docker image name (e.g. nginx or my-app)."
     },
     {
       "name": "image_tag",
       "type": "string",
       "required": false,
       "default": "latest",
-      "description": "The tag of the image to deploy.",
       "label": "Image Tag"
     },
     {
@@ -53,7 +59,6 @@
       "type": "number",
       "required": false,
       "default": 80,
-      "description": "The internal port the container listens on.",
       "label": "Container Port"
     },
     {
@@ -61,7 +66,6 @@
       "type": "string",
       "required": false,
       "default": "t3.micro",
-      "description": "EC2 Instance Type.",
       "label": "Instance Type"
     },
     {
@@ -69,15 +73,13 @@
       "type": "string",
       "required": false,
       "default": "bluebricks-demo",
-      "description": "Project name for tagging.",
       "label": "Project Name"
     }
   ],
   "outputs": [
     {
       "name": "security_group_id",
-      "description": "The Security Group ID of the Compute instances (Connect this to your RDS).",
-      "sensitive": false
+      "description": "The Security Group ID of the Compute instances."
     }
   ]
 }

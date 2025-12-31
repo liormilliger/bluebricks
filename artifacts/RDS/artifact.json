@@ -1,7 +1,7 @@
 {
   "name": "Postgres Database (RDS)",
   "identifier": "rds-postgres",
-  "description": "Managed PostgreSQL instance with private access limited to specific compute security groups.",
+  "description": "Managed PostgreSQL instance secured by Compute SG.",
   "type": "terraform",
   "path": "artifacts/RDS",
   "inputs": [
@@ -9,29 +9,27 @@
       "name": "vpc_id",
       "type": "string",
       "required": true,
-      "description": "The VPC ID where the database will be deployed.",
       "label": "VPC ID"
     },
     {
       "name": "subnet_ids",
       "type": "list(string)",
-      "required": false,
-      "description": "List of subnets (preferably private) for the DB Subnet Group.",
-      "label": "Subnets"
+      "required": true,
+      "label": "Subnets",
+      "description": "Wire this to the 'Private Subnets' output of the Network Artifact."
     },
     {
       "name": "compute_security_group_id",
       "type": "string",
-      "required": false,
-      "description": "The Security Group ID of the EC2/Compute layer. Traffic is allowed ONLY from this group.",
-      "label": "Allowed Compute SG"
+      "required": true,
+      "label": "Allowed Compute SG",
+      "description": "Wire to Compute Artifact Output."
     },
     {
       "name": "db_name",
       "type": "string",
       "required": false,
       "default": "bluebricks",
-      "description": "The name of the database to create.",
       "label": "Database Name"
     },
     {
@@ -39,7 +37,6 @@
       "type": "string",
       "required": false,
       "default": "lior",
-      "description": "Master username for the database.",
       "label": "Master Username"
     },
     {
@@ -47,7 +44,6 @@
       "type": "string",
       "required": true,
       "sensitive": true,
-      "description": "Master password for the database.",
       "label": "Master Password"
     },
     {
@@ -55,24 +51,21 @@
       "type": "string",
       "required": false,
       "default": "bluebricks-demo",
-      "description": "Project name for tagging.",
       "label": "Project Name"
     }
   ],
   "outputs": [
     {
       "name": "db_endpoint",
-      "description": "The connection endpoint address.",
-      "sensitive": false
+      "description": "Database Endpoint Address"
     },
     {
       "name": "db_port",
-      "description": "The database listening port.",
-      "sensitive": false
+      "description": "Database Port"
     },
     {
       "name": "connection_string",
-      "description": "Full PostgreSQL connection string.",
+      "description": "Full Connection String",
       "sensitive": true
     }
   ]
