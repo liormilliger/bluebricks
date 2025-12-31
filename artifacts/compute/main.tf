@@ -83,7 +83,8 @@ resource "aws_launch_template" "this" {
 
   # Inject variables into the bash script
   user_data = base64encode(templatefile("${path.module}/scripts/user_data.sh", {
-    image_repo     = var.image_repo
+    image_repo     = var.image_registry
+    image_name     = var.image_name
     image_tag      = var.image_tag
     container_port = var.container_port
   }))

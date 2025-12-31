@@ -27,8 +27,20 @@ variable "instance_type" {
   default = "t3.micro"
 }
 
-variable "image_repo" {
-  description = "Docker image repository (e.g., nginx or my-app)"
+variable "container_port" {
+  description = "Port the container listens on"
+  type        = number
+  default     = 80
+}
+
+variable "image_registry" {
+  description = "Registry URL (e.g. 123.dkr.ecr...). Leave empty for Docker Hub."
+  type        = string
+  default     = "" 
+}
+
+variable "image_name" {
+  description = "Image name (e.g. my-app or nginx)"
   type        = string
 }
 
@@ -36,10 +48,4 @@ variable "image_tag" {
   description = "Docker image tag"
   type        = string
   default     = "latest"
-}
-
-variable "container_port" {
-  description = "Port the container listens on"
-  type        = number
-  default     = 80
 }
