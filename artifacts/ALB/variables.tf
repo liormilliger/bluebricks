@@ -9,11 +9,6 @@ variable "vpc_id" {
   type        = string
 }
 
-variable "public_subnets" {
-  description = "List of public subnet IDs for the ALB"
-  type        = list(string)
-}
-
 variable "lb_port" {
   description = "The port the Load Balancer listens on"
   type        = number

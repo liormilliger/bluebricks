@@ -12,7 +12,7 @@ usermod -a -G docker ec2-user
 
 # --- 2. Parse Inputs ---
 # Variables injected by Terraform templatefile
-REGISTRY="${registry_url}"   # e.g., "123.dkr.ecr.us-east-1.amazonaws.com" or empty
+REGISTRY="${image_repo}"   # e.g., "123.dkr.ecr.us-east-1.amazonaws.com" or empty
 IMAGE="${image_name}"        # e.g., "my-app"
 TAG="${image_tag}"           # e.g., "v1" or empty
 

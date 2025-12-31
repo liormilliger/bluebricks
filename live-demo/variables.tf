@@ -17,6 +17,11 @@ variable "app_image" {
   # default     = "nginx" # Easy demo: change to 'httpd' to show update
 }
 
+variable "image_registry" {
+  description = "Registry to pull image from"
+  # default     = "dockerhub.com"
+}
+
 variable "app_port" {
   default = 80
 }
