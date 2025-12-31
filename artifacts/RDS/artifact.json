@@ -15,14 +15,14 @@
     {
       "name": "subnet_ids",
       "type": "list(string)",
-      "required": true,
+      "required": false,
       "description": "List of subnets (preferably private) for the DB Subnet Group.",
       "label": "Subnets"
     },
     {
       "name": "compute_security_group_id",
       "type": "string",
-      "required": true,
+      "required": false,
       "description": "The Security Group ID of the EC2/Compute layer. Traffic is allowed ONLY from this group.",
       "label": "Allowed Compute SG"
     },

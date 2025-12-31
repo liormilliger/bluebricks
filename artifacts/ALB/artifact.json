@@ -15,7 +15,7 @@
     {
       "name": "public_subnets",
       "type": "list(string)",
-      "required": true,
+      "required": false,
       "description": "List of public subnet IDs where the ALB will listen for traffic.",
       "label": "Public Subnets"
     },
