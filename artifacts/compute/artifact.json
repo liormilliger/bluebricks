@@ -1,0 +1,83 @@
+{
+  "name": "Compute Fleet (ASG)",
+  "identifier": "compute-fleet",
+  "description": "Scalable EC2 Auto Scaling Group running Docker containers.",
+  "type": "terraform",
+  "path": "artifacts/compute",
+  "inputs": [
+    {
+      "name": "vpc_id",
+      "type": "string",
+      "required": true,
+      "description": "The VPC ID where the instances will run.",
+      "label": "VPC ID"
+    },
+    {
+      "name": "subnet_ids",
+      "type": "list(string)",
+      "required": true,
+      "description": "List of subnets for the Auto Scaling Group.",
+      "label": "Subnets"
+    },
+    {
+      "name": "alb_security_group_id",
+      "type": "string",
+      "required": true,
+      "description": "The Security Group ID of the ALB (for ingress rules).",
+      "label": "ALB Security Group"
+    },
+    {
+      "name": "target_group_arn",
+      "type": "string",
+      "required": true,
+      "description": "The ARN of the ALB Target Group (to register instances).",
+      "label": "Target Group ARN"
+    },
+    {
+      "name": "image_repo",
+      "type": "string",
+      "required": true,
+      "description": "ECR Repository URL (e.g. 123.dkr.ecr.../repo).",
+      "label": "Docker Image Repo"
+    },
+    {
+      "name": "image_tag",
+      "type": "string",
+      "required": false,
+      "default": "latest",
+      "description": "The tag of the image to deploy.",
+      "label": "Image Tag"
+    },
+    {
+      "name": "container_port",
+      "type": "number",
+      "required": false,
+      "default": 80,
+      "description": "The internal port the container listens on.",
+      "label": "Container Port"
+    },
+    {
+      "name": "instance_type",
+      "type": "string",
+      "required": false,
+      "default": "t3.micro",
+      "description": "EC2 Instance Type.",
+      "label": "Instance Type"
+    },
+    {
+      "name": "project_name",
+      "type": "string",
+      "required": false,
+      "default": "bluebricks-demo",
+      "description": "Project name for tagging.",
+      "label": "Project Name"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "security_group_id",
+      "description": "The Security Group ID of the Compute instances (Connect this to your RDS).",
+      "sensitive": false
+    }
+  ]
+}

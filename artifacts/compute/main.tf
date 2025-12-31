@@ -21,6 +21,11 @@ resource "aws_iam_instance_profile" "this" {
   role = aws_iam_role.ec2_role.name
 }
 
+resource "aws_iam_role_policy_attachment" "ecr_policy" {
+  role       = aws_iam_role.ec2_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+}
+
 resource "aws_security_group" "ec2_sg" {
   name        = "${var.project_name}-ec2-sg"
   description = "Allow HTTP from ALB only"
@@ -63,12 +68,12 @@ resource "aws_launch_template" "this" {
   }
 
   network_interfaces {
-    associate_public_ip_address = true # Required if using Default VPC (Public Subnets)
+    associate_public_ip_address = true
     security_groups             = [aws_security_group.ec2_sg.id]
   }
 
   block_device_mappings {
-    device_name = "/dev/xvda" # Standard root device for Amazon Linux 2
+    device_name = "/dev/xvda"
     ebs {
       volume_size = 20
       volume_type = "gp3"
@@ -77,11 +82,11 @@ resource "aws_launch_template" "this" {
   }
 
   # Inject variables into the bash script
-  # user_data = base64encode(templatefile("${path.module}/scripts/user_data.sh", {
-  #   image_repo     = var.image_repo
-  #   image_tag      = var.image_tag
-  #   container_port = var.container_port
-  # }))
+  user_data = base64encode(templatefile("${path.module}/scripts/user_data.sh", {
+    image_repo     = var.image_repo
+    image_tag      = var.image_tag
+    container_port = var.container_port
+  }))
 
   tag_specifications {
     resource_type = "instance"
@@ -93,9 +98,8 @@ resource "aws_launch_template" "this" {
 resource "aws_autoscaling_group" "this" {
   name                = "${var.project_name}-asg"
   vpc_zone_identifier = var.subnet_ids
-  target_group_arns   = [var.target_group_arn] # <--- Connects to ALB
+  target_group_arns   = [var.target_group_arn]
   
-  # "Scalable" Requirement:
   min_size         = 1
   max_size         = 10
   desired_capacity = 2

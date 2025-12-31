@@ -1,0 +1,56 @@
+{
+  "name": "Application Load Balancer",
+  "identifier": "alb-networking",
+  "description": "Provisions an Application Load Balancer (ALB) with a listener and target group in public subnets.",
+  "type": "terraform",
+  "path": "artifacts/ALB",
+  "inputs": [
+    {
+      "name": "vpc_id",
+      "type": "string",
+      "required": true,
+      "description": "The VPC ID where the ALB will be deployed.",
+      "label": "VPC ID"
+    },
+    {
+      "name": "public_subnets",
+      "type": "list(string)",
+      "required": true,
+      "description": "List of public subnet IDs where the ALB will listen for traffic.",
+      "label": "Public Subnets"
+    },
+    {
+      "name": "project_name",
+      "type": "string",
+      "required": false,
+      "default": "bluebricks-demo",
+      "description": "Project name used for resource tagging.",
+      "label": "Project Name"
+    },
+    {
+      "name": "lb_port",
+      "type": "number",
+      "required": false,
+      "default": 80,
+      "description": "The port the Load Balancer listens on (Default: 80).",
+      "label": "Listener Port"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "target_group_arn",
+      "description": "The ARN of the Target Group (Connect this to your Compute/ASG).",
+      "sensitive": false
+    },
+    {
+      "name": "alb_security_group_id",
+      "description": "The Security Group ID of the ALB (Use this to secure your backend).",
+      "sensitive": false
+    },
+    {
+      "name": "alb_dns_name",
+      "description": "The public DNS name of the Load Balancer.",
+      "sensitive": false
+    }
+  ]
+}
