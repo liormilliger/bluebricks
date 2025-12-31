@@ -14,7 +14,7 @@ variable "vpc_id" {
 
 variable "app_image" {
   description = "The Docker image to run"
-  default     = "nginx" # Easy demo: change to 'httpd' to show update
+  # default     = "nginx" # Easy demo: change to 'httpd' to show update
 }
 
 variable "app_port" {
@@ -24,5 +24,5 @@ variable "app_port" {
 variable "db_password" {
   description = "Database password"
   sensitive   = true
-  default     = "password123!" # Change this for real use
+  # default     = "password123!" # Change this for real use
 }
