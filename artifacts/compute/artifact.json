@@ -80,11 +80,5 @@
       "default": "bluebricks-demo",
       "label": "Project Name"
     }
-  ],
-  "outputs": [
-    {
-      "name": "security_group_id",
-      "description": "The Security Group ID of the Compute instances."
-    }
   ]
 }
