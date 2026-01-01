@@ -25,11 +25,10 @@
       "description": "Wire this to the 'Public Subnets' output of the Network Artifact."
     },
     {
-      "name": "alb_security_group_id",
+      "name": "unified_security_group_id",
       "type": "string",
       "required": true,
-      "label": "ALB Security Group",
-      "description": "Wire to Network Artifact Output."
+      "label": "Unified Security Group"
     },
     {
       "name": "target_group_arn",

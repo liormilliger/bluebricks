@@ -11,11 +11,11 @@ module "compute" {
   source = "../artifacts/compute"
 
   project_name          = var.project_name
-  region         = var.region
+  region                = var.region
   vpc_id                = var.vpc_id
   public_subnet_ids            = module.network.public_subnets
   
-  alb_security_group_id = module.network.alb_security_group_id
+  unified_security_group_id = module.network.unified_security_group_id
   target_group_arn      = module.network.target_group_arn
   image_name = var.app_image
   image_registry     = var.image_registry
@@ -29,6 +29,6 @@ module "database" {
   region         = var.region
   vpc_id       = var.vpc_id
   private_subnet_ids   = module.network.private_subnets
-  compute_security_group_id = module.compute.security_group_id
+  unified_security_group_id = module.network.unified_security_group_id
   db_password = var.db_password
 }

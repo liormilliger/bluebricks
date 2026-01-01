@@ -1,9 +1,0 @@
-{
-    "name": "alb",
-    "description": "Generated using Bricks CLI",
-    "version": "1.0.0+92530e6",
-    "native": {
-        "type": "opentofu",
-        "path": "."
-    }
-}

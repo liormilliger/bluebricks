@@ -17,8 +17,8 @@ variable "public_subnet_ids" {
   type        = list(string)
 }
 
-variable "alb_security_group_id" {
-  description = "Security Group ID of the ALB to allow traffic from"
+variable "unified_security_group_id" {
+  description = "Unified Security Group ID from the ALB Module"
   type        = string
 }
 

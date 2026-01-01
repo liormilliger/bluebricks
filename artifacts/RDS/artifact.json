@@ -25,11 +25,10 @@
       "description": "Wire this to the 'Private Subnets' output of the Network Artifact."
     },
     {
-      "name": "compute_security_group_id",
+      "name": "unified_security_group_id",
       "type": "string",
       "required": true,
-      "label": "Allowed Compute SG",
-      "description": "Wire to Compute Artifact Output."
+      "label": "Unified SG"
     },
     {
       "name": "db_name",

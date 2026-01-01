@@ -30,28 +30,6 @@ resource "aws_iam_role_policy_attachment" "ecr_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
 
-resource "aws_security_group" "ec2_sg" {
-  name        = "${var.project_name}-ec2-sg"
-  description = "Allow HTTP from ALB only"
-  vpc_id      = var.vpc_id
-
-  ingress {
-    from_port       = 80
-    to_port         = 80
-    protocol        = "tcp"
-    security_groups = [var.alb_security_group_id]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"] # Need internet to pull Docker images
-  }
-
-  tags = { Name = "${var.project_name}-ec2-sg" }
-}
-
 # --- Launch Template ---
 data "aws_ami" "amazon_linux_2" {
   most_recent = true
@@ -73,7 +51,7 @@ resource "aws_launch_template" "this" {
 
   network_interfaces {
     associate_public_ip_address = true
-    security_groups             = [aws_security_group.ec2_sg.id]
+    security_groups             = [var.unified_security_group_id]
   }
 
   block_device_mappings {

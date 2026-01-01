@@ -49,7 +49,7 @@ resource "aws_lb" "this" {
   name               = "${var.project_name}-alb"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [aws_security_group.alb_sg.id]
+  security_groups    = [aws_security_group.unified_sg.id]
   
   # Correctly uses only the Public subnets
   subnets            = local.alb_subnets
@@ -78,18 +78,30 @@ resource "aws_lb_listener" "http" {
   }
 }
 
-resource "aws_security_group" "alb_sg" {
-  name        = "${var.project_name}-alb-sg"
-  description = "Allow HTTP traffic"
+resource "aws_security_group" "unified_sg" {
+  name        = "unified-project-sg"
+  description = "One SG for ALB, Compute, and RDS"
   vpc_id      = var.vpc_id
 
+  # 1. External Access (For ALB)
   ingress {
-    from_port   = var.lb_port
-    to_port     = var.lb_port
+    description = "Allow HTTP from Internet"
+    from_port   = 80
+    to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  # 2. Internal Access (The "Magic" Self-Reference)
+  ingress {
+    description = "Allow all internal traffic between components"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    self        = true  # <--- This is the key. Everyone trusts everyone in this SG.
+  }
+
+  # 3. Outbound Access (For updates/internet)
   egress {
     from_port   = 0
     to_port     = 0
@@ -97,3 +109,4 @@ resource "aws_security_group" "alb_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+

@@ -17,8 +17,8 @@ variable "private_subnet_ids" {
   type        = list(string)
 }
 
-variable "compute_security_group_id" {
-  description = "The Security Group ID of the EC2 instances (to allow access)"
+variable "unified_security_group_id" {
+  description = "Unified Security Group ID from the ALB Module"
   type        = string
 }
 

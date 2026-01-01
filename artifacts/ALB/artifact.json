@@ -38,7 +38,7 @@
       "description": "Target Group ARN"
     },
     { 
-      "name": "alb_security_group_id",
+      "name": "unified_security_group_id",
       "description": "ALB Security Group ID"
     },
     { 

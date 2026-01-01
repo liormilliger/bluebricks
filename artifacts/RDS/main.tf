@@ -11,21 +11,6 @@ resource "aws_db_subnet_group" "this" {
   }
 }
 
-resource "aws_security_group" "rds_sg" {
-  name        = "${var.project_name}-rds-sg"
-  description = "Allow PostgreSQL from Compute only"
-  vpc_id      = var.vpc_id
-
-  ingress {
-    from_port       = 5432
-    to_port         = 5432
-    protocol        = "tcp"
-    security_groups = [var.compute_security_group_id]
-  }
-
-  tags = { Name = "${var.project_name}-rds-sg" }
-}
-
 resource "aws_db_instance" "this" {
   identifier        = "${var.project_name}-db"
   engine            = "postgres"
@@ -39,7 +24,7 @@ resource "aws_db_instance" "this" {
   password = var.db_password
 
   db_subnet_group_name   = aws_db_subnet_group.this.name
-  vpc_security_group_ids = [aws_security_group.rds_sg.id]
+  vpc_security_group_ids = [var.unified_security_group_id]
   
   # Security Best Practice: Even if subnets are public, don't expose DB
   publicly_accessible    = false
