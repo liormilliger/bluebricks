@@ -19,7 +19,7 @@
     },
     {
       "name": "public_subnet_ids",
-      "type": "array",
+      "type": "list(string)",
       "required": true,
       "label": "Subnets",
       "description": "List of Subnet IDs where instances will launch."
@@ -81,6 +81,5 @@
       "default": "bluebricks-demo",
       "label": "Project Name"
     }
-  ],
-  "outputs": []
+  ]
 }
