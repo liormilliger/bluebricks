@@ -9,6 +9,7 @@ variable "region" {
 }
 
 variable "vpc_id" {
+  description = "Imported VPC"
   type = string
 }
 

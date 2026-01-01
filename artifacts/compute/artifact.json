@@ -19,23 +19,24 @@
     },
     {
       "name": "public_subnet_ids",
-      "type": "list(string)",
+      "type": "array",
       "required": true,
       "label": "Subnets",
-      "description": "Wire this to the 'Public Subnets' output of the Network Artifact."
+      "description": "List of Subnet IDs where instances will launch."
     },
     {
       "name": "unified_security_group_id",
       "type": "string",
       "required": true,
-      "label": "Unified Security Group"
+      "label": "Unified Security Group",
+      "description": "The shared Security Group ID from the Network/Base module."
     },
     {
       "name": "target_group_arn",
       "type": "string",
       "required": true,
       "label": "Target Group ARN",
-      "description": "Wire to Network Artifact Output."
+      "description": "ARN of the ALB Target Group to register instances with."
     },
     {
       "name": "image_registry",
@@ -80,5 +81,6 @@
       "default": "bluebricks-demo",
       "label": "Project Name"
     }
-  ]
+  ],
+  "outputs": []
 }
