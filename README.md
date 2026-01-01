@@ -1,6 +1,3 @@
-Based on your project structure and the details provided, here is a polished, professional `README.md` file. I have improved the flow, added technical formatting, and integrated the reference to your architecture diagram.
-
-```markdown
 # 3-Tier Reusable AWS Architecture (Terraform)
 
 ## Overview
@@ -105,9 +102,5 @@ To remove all resources created by this project:
 
 ```bash
 terraform destroy
-
-```
-
-```
 
 ```
