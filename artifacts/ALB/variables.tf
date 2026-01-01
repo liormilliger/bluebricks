@@ -14,3 +14,9 @@ variable "lb_port" {
   type        = number
   default     = 80
 }
+
+variable "region" {
+  description = "AWS Region to deploy resources into"
+  type        = string
+}
+

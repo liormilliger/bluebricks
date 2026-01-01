@@ -6,6 +6,12 @@
   "path": "artifacts/compute",
   "inputs": [
     {
+      "name": "region",
+      "type": "string",
+      "required": true,
+      "label": "AWS Region"
+    },
+    {
       "name": "vpc_id",
       "type": "string",
       "required": true,

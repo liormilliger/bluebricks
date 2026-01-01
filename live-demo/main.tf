@@ -1,16 +1,17 @@
 module "network" {
   source = "../artifacts/ALB"
 
+  region         = var.region
   project_name   = var.project_name
   vpc_id         = var.vpc_id
   lb_port        = 80
 }
 
-# --- Artifact 2: Compute (ASG + App) ---
 module "compute" {
   source = "../artifacts/compute"
 
   project_name          = var.project_name
+  region         = var.region
   vpc_id                = var.vpc_id
   public_subnet_ids            = module.network.public_subnets
   
@@ -21,11 +22,11 @@ module "compute" {
   container_port = var.app_port
 }
 
-# --- Artifact 3: Database (RDS) ---
 module "database" {
   source = "../artifacts/RDS"
 
   project_name = var.project_name
+  region         = var.region
   vpc_id       = var.vpc_id
   private_subnet_ids   = module.network.private_subnets
   compute_security_group_id = module.compute.security_group_id

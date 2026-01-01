@@ -1,3 +1,7 @@
+provider "aws" {
+  region = var.region
+}
+
 resource "aws_iam_role" "ec2_role" {
   name = "${var.project_name}-ec2-role"
 

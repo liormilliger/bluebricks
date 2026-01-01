@@ -1,3 +1,7 @@
+provider "aws" {
+  region = var.region
+}
+
 # --- 1. Find Public Subnets ---
 data "aws_subnets" "public" {
   filter {

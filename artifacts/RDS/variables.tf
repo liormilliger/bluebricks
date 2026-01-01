@@ -3,6 +3,11 @@ variable "project_name" {
   default = "bluebricks-demo"
 }
 
+variable "region" {
+  description = "AWS Region to deploy resources into"
+  type        = string
+}
+
 variable "vpc_id" {
   type = string
 }

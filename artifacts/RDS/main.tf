@@ -1,3 +1,7 @@
+provider "aws" {
+  region = var.region
+}
+
 resource "aws_db_subnet_group" "this" {
   name       = "${var.project_name}-subnet-group"
   subnet_ids = var.private_subnet_ids
@@ -22,7 +26,6 @@ resource "aws_security_group" "rds_sg" {
   tags = { Name = "${var.project_name}-rds-sg" }
 }
 
-# --- RDS Instance ---
 resource "aws_db_instance" "this" {
   identifier        = "${var.project_name}-db"
   engine            = "postgres"
