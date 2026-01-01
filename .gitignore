@@ -1,2 +1,5 @@
 live-demo/.terraform/
 live-demo/.terraform*
+# compute/artifact.json
+# ALB/artifact.json
+# RDS/artifact.json

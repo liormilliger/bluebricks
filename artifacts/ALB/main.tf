@@ -1,4 +1,4 @@
-# --- 1. Find Public Subnets (Now works!) ---
+# --- 1. Find Public Subnets ---
 data "aws_subnets" "public" {
   filter {
     name   = "vpc-id"
@@ -6,7 +6,7 @@ data "aws_subnets" "public" {
   }
   filter {
     name   = "map-public-ip-on-launch"
-    values = ["true"] # This will now find your 2 public subnets
+    values = ["true"]
   }
 }
 
