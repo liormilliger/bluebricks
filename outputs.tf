@@ -7,3 +7,8 @@ output "rds_endpoint" {
   description = "The connection endpoint for the RDS database instance"
   value       = module.database.db_endpoint
 }
+
+output "public_subnets_ids" {
+    description = "The AWS id of the public subnets"
+    value = module.network.public_subnet_ids
+}

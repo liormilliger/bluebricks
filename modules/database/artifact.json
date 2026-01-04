@@ -24,7 +24,8 @@
     "db_password": {
       "type": "string",
       "description": "Master password for the DB",
-      "sensitive": true
+      "sensitive": true,
+      "default": "Password123!"
     }
   }
 }

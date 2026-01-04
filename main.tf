@@ -1,5 +1,12 @@
 provider "aws" {
   region = var.region
+  
+  default_tags {
+    tags = {
+      # This tag will appear on ALL resources
+      project = "bluebricks"
+    }
+  }
 }
 
 module "network" {
