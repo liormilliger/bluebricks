@@ -1,3 +1,7 @@
+provider "aws" {
+  region = var.region
+}
+
 # --- IAM Role for EC2 (ECR Pull Access) ---
 resource "aws_iam_role" "ec2_role" {
   name = "${var.project_name}-ec2-role"

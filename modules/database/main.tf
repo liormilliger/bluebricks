@@ -1,3 +1,7 @@
+provider "aws" {
+  region = var.region
+}
+
 resource "aws_db_subnet_group" "default" {
   name       = "${var.project_name}-db-subnet-group"
   subnet_ids = var.subnets
