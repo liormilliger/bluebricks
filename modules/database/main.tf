@@ -13,7 +13,7 @@ resource "aws_db_instance" "default" {
   engine_version         = "16"
   instance_class         = "db.t3.micro"
   db_name                = "appdb"
-  username               = "admin"
+  username               = "liormilliger"
   password               = var.db_password
   parameter_group_name   = "default.postgres16"
   skip_final_snapshot    = true

@@ -1,0 +1,17 @@
+{
+  "name": "vpc_network",
+  "description": "Standard VPC with 2 Public and 2 Private subnets and a shared Security Group",
+  "version": "1.0.0",
+  "manifest_version": 1,
+  "state": "managed",
+  "native": {
+    "type": "terraform",
+    "entry_point": "."
+  },
+  "props": {
+    "project_name": {
+      "type": "string",
+      "description": "The project name prefix used to tag VPC, subnets, and security groups"
+    }
+  }
+}

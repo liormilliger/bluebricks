@@ -1,0 +1,30 @@
+{
+  "name": "rds_mysql",
+  "description": "RDS MySQL instance attached to the shared security group",
+  "version": "1.0.0",
+  "manifest_version": 1,
+  "state": "managed",
+  "native": {
+    "type": "terraform",
+    "entry_point": "."
+  },
+  "props": {
+    "project_name": {
+      "type": "string",
+      "description": "Prefix for resource naming"
+    },
+    "subnets": {
+      "type": "list",
+      "description": "List of subnet IDs for the DB Subnet Group"
+    },
+    "security_group_id": {
+      "type": "string",
+      "description": "The Shared Security Group ID"
+    },
+    "db_password": {
+      "type": "string",
+      "description": "Master password for the DB",
+      "sensitive": true
+    }
+  }
+}

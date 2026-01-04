@@ -29,9 +29,10 @@ resource "aws_subnet" "private" {
   tags = { Name = "${var.project_name}-private-${count.index + 1}" }
 }
 
-# --- Internet Gateway & Route Table ---
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
+  tags = { Name = "${var.project_name}-igw" }
+
 }
 
 resource "aws_route_table" "public" {
