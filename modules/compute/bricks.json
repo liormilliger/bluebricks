@@ -1,0 +1,9 @@
+{
+    "name": "compute",
+    "description": "Generated using Bricks CLI",
+    "version": "1.0.0+1767aeb2",
+    "native": {
+        "type": "opentofu",
+        "path": "."
+    }
+}

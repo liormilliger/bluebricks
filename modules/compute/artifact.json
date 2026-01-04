@@ -18,7 +18,7 @@
       "description": "The ID of the VPC"
     },
     "subnets": {
-      "type": "list",
+      "type": "list(string)",
       "description": "List of subnet IDs for placement"
     },
     "security_group_id": {

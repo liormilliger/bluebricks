@@ -14,7 +14,7 @@
       "description": "Prefix for resource naming"
     },
     "subnets": {
-      "type": "list",
+      "type": "list(string)",
       "description": "List of subnet IDs for the DB Subnet Group"
     },
     "security_group_id": {
