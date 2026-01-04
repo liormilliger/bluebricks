@@ -11,34 +11,42 @@
   "props": {
     "project_name": {
       "type": "string",
-      "description": "Prefix for resource naming"
+      "description": "Prefix for resource naming",
+      "required": false
     },
     "vpc_id": {
       "type": "string",
-      "description": "The ID of the VPC"
+      "description": "The ID of the VPC",
+      "required": false
     },
     "subnets": {
       "type": "list(string)",
-      "description": "List of subnet IDs for placement"
+      "description": "List of subnet IDs for placement",
+      "required": false
     },
     "security_group_id": {
       "type": "string",
-      "description": "The Shared Security Group ID"
+      "description": "The Shared Security Group ID",
+      "required": false
     },
     "repository_url": {
       "type": "string",
       "description": "Container repository URL",
-      "default": "index.docker.io"
+      "default": "https://hub.docker.com/",
+      "required": false
     },
     "image_name": {
       "type": "string",
       "description": "Container image name",
-      "default": "nginx"
+      "default": "nginx",
+      "required": false
     },
     "image_tag": {
       "type": "string",
       "description": "Container image tag",
-      "default": "latest"
+      "default": "latest",
+      "required": false
+
     }
   }
 }

@@ -11,15 +11,18 @@
   "props": {
     "project_name": {
       "type": "string",
-      "description": "Prefix for resource naming"
+      "description": "Prefix for resource naming",
+      "required": false
     },
     "subnets": {
       "type": "list(string)",
-      "description": "List of subnet IDs for the DB Subnet Group"
+      "description": "List of subnet IDs for the DB Subnet Group",
+      "required": false
     },
     "security_group_id": {
       "type": "string",
-      "description": "The Shared Security Group ID"
+      "description": "The Shared Security Group ID",
+      "required": false
     },
     "db_password": {
       "type": "string",

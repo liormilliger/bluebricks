@@ -1,9 +1,0 @@
-{
-    "name": "network",
-    "description": "Generated using Bricks CLI",
-    "version": "1.0.0+b90c19ca",
-    "native": {
-        "type": "opentofu",
-        "path": "."
-    }
-}

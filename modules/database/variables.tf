@@ -6,11 +6,13 @@ variable "project_name" {
 variable "subnets" {
   description = "A list of subnet IDs where the RDS subnet group will be created"
   type        = list(string)
+  default = module.network.public_subnet_ids
 }
 
 variable "security_group_id" {
   description = "The ID of the shared security group to attach to the RDS instance"
   type        = string
+  default = module.network.shared_sg_id
 }
 
 variable "db_password" {
